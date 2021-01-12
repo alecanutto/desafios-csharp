@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Desafios_CSharp
 {
@@ -15,6 +18,14 @@ namespace Desafios_CSharp
             Desafio4();
             Console.WriteLine();
             Desafio5();
+            Console.WriteLine();
+            Desafio6();
+            Console.WriteLine();
+            Desafio7();
+            Console.WriteLine();
+            Desafio8();
+            Console.WriteLine();
+            Desafio9();
         }
 
         public static void Desafio1()
@@ -151,13 +162,114 @@ namespace Desafios_CSharp
 
         public static void Desafio5()
         {
-            string[] line = Console.ReadLine().Split(" ");            
+            string[] line = Console.ReadLine().Split(" ");
             double coxinhas = int.Parse(line[0]);
             double participantes = int.Parse(line[1]);
-            double media =  coxinhas / participantes;
+            double media = coxinhas / participantes;
             Console.WriteLine(media.ToString("N2"));
         }
 
+        public static void Desafio6()
+        {
+            List<double> notas = new List<double>();
+            int opcao;
+            do
+            {
+                while (notas.Count < 2)
+                {
+                    double nota = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                    if (nota < 0 || nota > 10)
+                    {
+                        Console.WriteLine("nota invalida");
+                    }
+                    else
+                    {
+                        notas.Add(nota);
+                    }
+                }
+                double media = (notas[0] + notas[1]) / 2;
+                Console.WriteLine("media = " + media.ToString("N2"));
+                notas.Clear();
 
+                do
+                {
+                    Console.WriteLine("novo calculo (1-sim 2-nao)");
+                    opcao = int.Parse(Console.ReadLine());
+                } while (opcao != 1 && opcao != 2);
+
+            } while (opcao == 1);
+        }
+
+        public static void Desafio7()
+        {
+            int limit = int.Parse(Console.ReadLine());
+            List<string> lista = new List<string>();
+            for (int i = 0; i < limit; i++)
+            {
+                if (i > 100) return;
+                string[] line = Console.ReadLine().Split(" ");
+                for (int item = 0; item < line.Length; item++)
+                {
+                    if (item > 1000) return;
+                    if (!lista.Contains(line[item]))
+                    {
+                        lista.Add(line[item]);
+                    }
+                }
+                lista.Sort();
+                Console.WriteLine(string.Join(" ", lista));
+                lista.Clear();
+            }
+        }
+
+        public static void Desafio8()
+        {
+            while (true)
+            {
+                string senha = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(senha)) break;
+
+                Regex rx = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,32}$");
+                Match match = rx.Match(senha);
+                if (match.Success)
+                {
+                    Console.WriteLine("Senha valida.");
+                }
+                else
+                {
+                    Console.WriteLine("Senha invalida.");
+                }
+            }
+        }
+
+        public static void Desafio9()
+        {
+            int limit = int.Parse(Console.ReadLine());
+            for (int i = 0; i < limit; i++)
+            {
+                if (i > 1000) return;
+                int pessoas = int.Parse(Console.ReadLine());
+                List<int> lista = new List<int>();
+                string[] line = Console.ReadLine().Split(" ");
+                foreach (string item in line)
+                {
+                    if (lista.Count > 1000) return;
+                    lista.Add(int.Parse(item));
+                }
+                lista.Sort((a, b) => b.CompareTo(a));
+
+                int quantidade = pessoas;
+                for (int x = 0; x < lista.Count; x++)
+                {
+                    if (int.Parse(line[x]) != lista[x])
+                    {
+                        quantidade--;
+                    }
+                }
+                Console.WriteLine(quantidade);
+            }
+        }
+        
     }
 }
