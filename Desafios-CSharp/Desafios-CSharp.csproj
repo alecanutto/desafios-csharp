@@ -7,7 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Desenvolvendo algoritmos com CSharp\Calculo de viagem\**" />
+    <Compile Remove="Resolvendo algoritmos\Hora da corrida\**" />
+    <EmbeddedResource Remove="Desenvolvendo algoritmos com CSharp\Calculo de viagem\**" />
+    <EmbeddedResource Remove="Resolvendo algoritmos\Hora da corrida\**" />
+    <None Remove="Desenvolvendo algoritmos com CSharp\Calculo de viagem\**" />
+    <None Remove="Resolvendo algoritmos\Hora da corrida\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Bootcamp_Avanade.cs" />
+    <Compile Remove="Bootcamp_DotNetFundamentals.cs" />
     <Compile Remove="Desafio1.cs" />
+    <Compile Remove="DividindoXporY.cs" />
+    <Compile Remove="Introdução a Programação com CSharp\CalculoDeViagem.cs" />
   </ItemGroup>
 
 </Project>
